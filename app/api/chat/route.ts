@@ -54,7 +54,7 @@ export async function POST(req: NextRequest) {
 
     // Create message with extended thinking and web search
     const response = await anthropic.messages.create({
-      model: 'claude-sonnet-4-5-20250929',
+      model: 'claude-3-7-sonnet-20250219',
       max_tokens: 8000,
       system: promptSettings?.mainPrompt || 'You are a helpful AI assistant.',
       messages,

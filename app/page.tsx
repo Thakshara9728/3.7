@@ -157,7 +157,7 @@ export default function Home() {
 
         <div className="p-4 border-t border-gray-800 text-xs text-gray-500">
           <div className="space-y-1">
-            <div>Model: claude-sonnet-4-5</div>
+            <div>Model: claude-3.7-sonnet</div>
             <div>Max Tokens: 8K</div>
             <div>Thinking Budget: 10K</div>
           </div>

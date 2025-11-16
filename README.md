@@ -4,7 +4,7 @@ Modern Next.js webapp with Claude Sonnet 3.7 API, featuring extended thinking an
 
 ## Features
 
-- **Claude Sonnet 3.7**: Latest Claude model (claude-sonnet-4-5-20250929)
+- **Claude Sonnet 3.7**: Latest Claude model (claude-3-7-sonnet-20250219)
 - **Extended Thinking**: 10K token thinking budget for deeper reasoning
 - **Web Search**: Integrated web search tool for current information
 - **Prompt Management**: Store and manage 3 prompt types (main, first message, continue)
