@@ -8,7 +8,7 @@ const anthropic = new Anthropic({
 
 export async function POST(req: NextRequest) {
   try {
-    const { message, chatId, useExtendedThinking = true } = await req.json()
+    const { message, chatId, useExtendedThinking = true, thinkingBudget = 10000 } = await req.json()
 
     // Get or create chat
     let chat = chatId
@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
       thinking: useExtendedThinking
         ? {
             type: 'enabled',
-            budget_tokens: 10000,
+            budget_tokens: thinkingBudget,
           }
         : undefined,
       tools: [

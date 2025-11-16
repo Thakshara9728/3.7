@@ -22,6 +22,7 @@ export default function Home() {
   const [chatId, setChatId] = useState<string | null>(null)
   const [showSettings, setShowSettings] = useState(false)
   const [showThinking, setShowThinking] = useState(true)
+  const [thinkingBudget, setThinkingBudget] = useState(10000)
   const [prompts, setPrompts] = useState<PromptSettings>({
     mainPrompt: 'You are a helpful AI assistant.',
     firstMessage: 'Hello! How can I help you today?',
@@ -31,11 +32,19 @@ export default function Home() {
 
   useEffect(() => {
     loadPrompts()
+    const savedBudget = localStorage.getItem('thinkingBudget')
+    if (savedBudget) {
+      setThinkingBudget(Number(savedBudget))
+    }
   }, [])
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
+
+  useEffect(() => {
+    localStorage.setItem('thinkingBudget', String(thinkingBudget))
+  }, [thinkingBudget])
 
   const loadPrompts = async () => {
     try {
@@ -84,6 +93,7 @@ export default function Home() {
           message: userMessage,
           chatId,
           useExtendedThinking: true,
+          thinkingBudget,
         }),
       })
 
@@ -159,7 +169,7 @@ export default function Home() {
           <div className="space-y-1">
             <div>Model: claude-3.7-sonnet</div>
             <div>Max Tokens: 8K</div>
-            <div>Thinking Budget: 10K</div>
+            <div>Thinking Budget: {(thinkingBudget / 1000).toFixed(0)}K</div>
           </div>
         </div>
       </div>
@@ -245,6 +255,25 @@ export default function Home() {
             <h2 className="text-2xl font-bold text-white mb-6">Prompt Settings</h2>
 
             <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-2">
+                  Thinking Budget: {(thinkingBudget / 1000).toFixed(0)}K tokens
+                </label>
+                <input
+                  type="range"
+                  min="1000"
+                  max="50000"
+                  step="1000"
+                  value={thinkingBudget}
+                  onChange={(e) => setThinkingBudget(Number(e.target.value))}
+                  className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                />
+                <div className="flex justify-between text-xs text-gray-500 mt-1">
+                  <span>1K</span>
+                  <span>50K</span>
+                </div>
+              </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">
                   Main System Prompt
