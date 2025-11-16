@@ -66,12 +66,7 @@ export async function POST(req: NextRequest) {
         : undefined,
       tools: [
         {
-          type: 'web_search_20250305' as const,
-          name: 'web_search',
-          query: '',
-          include_raw_content: false,
-          source_types: ['web'],
-          max_results: 5,
+          type: 'web_search_20250305',
         },
       ],
       betas: ['web-search-2025-03-05', 'interleaved-thinking-2025-05-14'],
